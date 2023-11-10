@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #0f172a;
+    --main-color: #6b7280;
+    --other-color: #334155;
+    --big-font: 4.3rem;
+    --h2-font: 2.2rem;
+    --p-font: 1rem;
+}
+
+body {
+    color: var(--text-color);
+    background: var(--bg-color);
+    background-image: url(landingpage.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+header {
+    position: relative;
+    right: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 17px 11%;
+    transition: all 450ms ease;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    color: #a368c2;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a {
+    font-size: var(--p-font);
+    color: var(--other-color);
+    font-weight: 400;
+    padding: 10px 25px;
+    margin: 0 5px;
+    background: transparent;
+    border-radius: 30px;
+    transition: all 450ms ease;
+}
+
+.navbar a:hover {
+    background: #f7f9fb;
+    color: #a368c2;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons .ion {
+    height: 25px;
+    width: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border-radius: 50%;
+    color: var(--other-color);
+    font-size: 22px;
+    margin-right: auto;
+    margin-left: 10px;
+    transition: all 450ms ease;
+}
+
+.icons .ion:hover {
+    transform: scale(1.2);
+    color: #a368c2;
+}
+
+#menu-icon {
+    color: var(--other-color);
+    font-size: 33px;
+    cursor: pointer;
+    display: none;
+}
+
+.home-text {
+    max-width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+}
+
+.home-text h4 {
+    font-size: 25px;
+}
+
+.home-text h1 {
+    font-size: 37px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 16px 30px;
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-size: 15px;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    transition: all 450ms ease;
+}
+
+.btn:hover {
+    background: #fff;
+    color: var(--primary-color);
+    border: 1px solid #a368c2;
+}
+
+.product {
+    height: 400px;
+    background: #ffffff;
+    margin-top: 100vh;
+}
+
+.card {
+    height: 350px;
+    width: 300px;
+
+    border: 2px solid #dddddd;
+    border-radius: 10px;
+}
