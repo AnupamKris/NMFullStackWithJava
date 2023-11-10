@@ -119,4 +119,10 @@ footer {
     }
   }
 }
+
+.col1, .col2, .col3 {
+  span:hover{
+    color: #5085f7;
+  }
+}
 </style>
