@@ -16,7 +16,13 @@
 
         <span>₹4,599</span>
 
-        <button>Add To Cart</button>
+        <button>
+          <NuxtLink
+            to="/product/xboxc"
+            style="text-decoration: none; color: #141414"
+            >Buy</NuxtLink
+          >
+        </button>
       </div>
       <div class="img">
         <img :src="xbox" alt="" />

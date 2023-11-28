@@ -4,13 +4,13 @@
 
     <div class="items">
       <NuxtLink class="item" to="/">Home</NuxtLink>
-      <NuxtLink class="item" to="shop">Shop</NuxtLink>
-      <NuxtLink class="item" to="contact">Contact</NuxtLink>
+      <NuxtLink class="item" to="/shop">Shop</NuxtLink>
+      <NuxtLink class="item" to="/contact">Contact</NuxtLink>
     </div>
 
     <div class="user">
-      <NuxtLink to="/cart" class="icon-u cart"
-        ><Icon name="uil:shopping-cart"
+      <NuxtLink to="/logout" class="icon-u cart" :style="{ color: '#ff0000' }"
+        ><Icon name="uil:power"
       /></NuxtLink>
       <NuxtLink to="/profile" class="icon-u profile"
         ><Icon name="uil:user"
@@ -32,6 +32,10 @@
   position: fixed;
   top: 0;
   left: 0;
+
+  z-index: 10;
+  background: #141414;
+  border-bottom: 1px solid #222222;
 
   // set text color to inverse of background
   color: #fff;

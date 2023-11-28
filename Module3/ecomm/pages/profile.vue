@@ -2,15 +2,23 @@
   <div class="profile page">
     <div class="reg">
       <h4>START FOR FREE</h4>
-      <h1>
+      <h1 v-if="mode == 'signup'">
         Create new account
         <p>.</p>
       </h1>
-      <p>Already a Member? <NuxtLink to="login">Log In</NuxtLink></p>
+      <h1 v-else>
+        Enter your details
+        <p>.</p>
+      </h1>
+      <p v-if="mode == 'signup'">
+        Already a Member? <span @click="mode = 'login'">Log In</span>
+      </p>
+      <p v-else>New user? <span @click="mode = 'signup'">Sign Up.</span></p>
 
       <div class="form">
         <div class="group">
           <InputField
+            v-if="mode == 'signup'"
             id="first"
             v-model="firstname"
             label="First Name"
@@ -18,6 +26,7 @@
             icon="fluent:contact-card-16-filled"
           />
           <InputField
+            v-if="mode == 'signup'"
             id="last"
             v-model="lastname"
             label="Last Name"
@@ -40,25 +49,91 @@
           icon="fluent:password-16-filled"
         />
         <InputField
+          v-if="mode == 'signup'"
           id="repassword"
           v-model="passwordConfirm"
           label="Confirm Password"
           type="password"
           icon="fluent:password-16-filled"
         />
-        <button>Sign Up</button>
+        <button @click="signup" v-if="mode == 'signup'">Sign Up</button>
+        <button @click="login" v-else>Log In</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { doc, setDoc } from "firebase/firestore";
 const firstname = ref("");
 const lastname = ref("");
 
 const email = ref("");
 const password = ref("");
 const passwordConfirm = ref("");
+
+const mode = ref("login");
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+const auth = useFirebaseAuth();
+const user = useCurrentUser();
+const router = useRouter();
+
+onMounted(() => {
+  if (user.value) {
+    router.push("/account");
+  }
+});
+
+const signup = () => {
+  if (password.value !== passwordConfirm.value) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  console.log(firstname.value, lastname.value, email.value, password.value);
+
+  createUserWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      const db = useFirestore();
+      const docRef = doc(db, "users", user.email);
+      setDoc(docRef, {
+        firstname: firstname.value,
+        lastname: lastname.value,
+        email: email.value,
+        orders: [],
+      });
+      router.push("/account");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+};
+
+const login = () => {
+  signInWithEmailAndPassword(auth, email.value, password.value)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      router.push("/account");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      alert(errorMessage);
+    });
+};
 </script>
 
 <style lang="scss" scoped>
